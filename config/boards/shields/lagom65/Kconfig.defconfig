@@ -4,7 +4,7 @@
 if SHIELD_LAGOM65
 
 config ZMK_KEYBOARD_NAME
-    default "lagom65"
+    default "Lagom"
 
 if ZMK_DISPLAY
 
