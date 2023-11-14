@@ -14,4 +14,4 @@
 ---
 include:
   - board: nrfmicro_13
-    shield: two_percent_milk
+    shield: Lagom65
