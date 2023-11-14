@@ -1,10 +1,16 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
 / {
     sensors {
-        sensors = <&left_encoder &right_encoder>;
+        sensors = <&encoder_1 &encoder_2>;
     };
 
     keymap {
