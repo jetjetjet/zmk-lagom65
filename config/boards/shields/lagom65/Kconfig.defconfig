@@ -18,7 +18,7 @@ config SSD1306_REVERSE_MODE
     default y
 
 endif # ZMK_DISPLAY
-
+a
 if LVGL
 
 config LV_Z_VDB_SIZE
@@ -36,4 +36,4 @@ endchoice
 
 endif # LVGL
 
-endifQ
+endif
