@@ -10,7 +10,7 @@ manifest:
       revision: main
       import: app/west.yml
     - name: zmk-keyboards-lagom
-      remote: lagom65
+      remote: jetjetjet
       revision: main
   self:
     path: config
