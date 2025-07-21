@@ -3,10 +3,9 @@ manifest:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
   projects:
-  - name: zmk
-    revision: main
-  - name: zmk-config
+    - name: zmk
+      remote: zmkfirmware
+      revision: main
+      import: app/west.yml
+  self:
     path: config
-  - name: zmk-keyboard-lagom65
-    path: modules/lagom65
-    url: https://github.com/jetjetjet/zmk-keyboard-lagom65
