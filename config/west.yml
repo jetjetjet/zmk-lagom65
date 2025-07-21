@@ -2,13 +2,15 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: jetjetjet
+      url-base: https://github.com/jetjetjet
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
-      import: app/west.yml 
-    - name: zmk-keyboard-lagom65
-      path: modules/lagom65
-      url: https://github.com/jetjetjet/zmk-lagom65
+      import: app/west.yml
+    - name: zmk-keyboards-lagom
+      remote: lagom65
+      revision: main
   self:
     path: config
