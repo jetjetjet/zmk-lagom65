@@ -2,7 +2,7 @@
  * Copyright (c) 2024
  * SPDX-License-Identifier: MIT
  */
-
+#include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
@@ -16,16 +16,16 @@
     encoder_1: encoder_1 {
         compatible = "zmk,ec11-encoder";
         label = "Encoder 1";
-        a-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
-        b-gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
+        a-gpios = <&gpio0 9 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        b-gpios = <&gpio0 10 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
         encoder-keycodes = <&kp VOL_UP>, <&kp VOL_DN>;
     };
 
     encoder_2: encoder_2 {
         compatible = "zmk,ec11-encoder";
         label = "Encoder 2";
-        a-gpios = <&gpio0 21 GPIO_ACTIVE_LOW>;
-        b-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+        a-gpios = <&gpio0 21 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        b-gpios = <&gpio0 20 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
         encoder-keycodes = <&kp C_NEXT>, <&kp C_PREV>;
     };
 
