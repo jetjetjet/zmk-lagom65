@@ -3,7 +3,8 @@ id: lagom
 name: Lagom
 type: shield
 url: https://github.com/mohoyt/lagom
-requires: [pro_micro]
+requires: [nrfmicro_13]
 features:
   - keys
   - encoders
+  - display

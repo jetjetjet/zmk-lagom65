@@ -8,64 +8,112 @@
 
 / {
     chosen {
-        zmk,kscan = &kscan0;
+        zephyr,display = &oled; // Mengaktifkan display OLED [cite: 30]
+        zmk,kscan = &kscan0; // Menggunakan kscan0 sebagai input keyboard [cite: 30]
+        zmk,matrix_transform = &default_transform; // Merujuk ke definisi transformasi matriks
+        zmk,battery = &vbat; // Mengaktifkan monitoring baterai (penting untuk wireless)
+    };
+
+    // Encoder Pertama (sesuai dengan &encoder_1 di keymap)
+    encoder_1: encoder_1 { // Mengganti nama dari ec11_left menjadi encoder_1
+        compatible = "zmk,ec11-encoder"; // Mengganti dari alps,ec11 ke zmk,ec11-encoder
+        label = "Encoder 1";
+        // Pin yang Anda berikan untuk ec11_left, asumsikan ini untuk encoder_1
+        a-gpios = <&gpio0 9 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; [cite: 38]
+        b-gpios = <&gpio0 10 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; [cite: 38]
+        encoder-keycodes = <&kp VOL_UP>, <&kp VOL_DN>; [cite: 38]
+    };
+
+    // Encoder Kedua (sesuai dengan &encoder_2 di keymap)
+    encoder_2: encoder_2 { // Menambahkan definisi untuk encoder_2
+        compatible = "zmk,ec11-encoder";
+        label = "Encoder 2";
+        // Contoh pin untuk encoder kedua. Anda HARUS MENGUBAH ini
+        // dengan pin GPIO nrfmicro 1.3 yang TEPAT untuk encoder kedua Anda.
+        // Jika Anda mengambil dari kode sebelumnya (pro_micro 21, 20),
+        // ini bisa jadi P0.21 dan P0.20 di nrfmicro
+        a-gpios = <&gpio0 21 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        b-gpios = <&gpio0 20 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+        encoder-keycodes = <&kp C_NEXT>, <&kp C_PREV>; // Contoh, sesuaikan dengan kebutuhan Anda
     };
 
     kscan0: kscan0 {
-        compatible = "zmk,kscan-gpio-matrix";
+        compatible = "zmk,kscan-gpio-matrix"; [cite: 31]
+        // Baris (Rows)
+        row-gpios = <&gpio0 3  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 32]
+                    <&gpio0 28 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 32]
+                    <&gpio0 29 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 32]
+                    <&gpio0 30 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 32]
+                    <&gpio0 31 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; [cite: 32, 33]
 
-        row-gpios = <&gpio0 3  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio0 28 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio0 29 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio0 30 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio0 31 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-
-        col-gpios = <&gpio0 2  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 0  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 1  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 2  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 3  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 4  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 5  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 6  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 7  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 8  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 9  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 10 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>,
-                    <&gpio1 13 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-
-        diode-direction = <0>; // COL2ROW
+        // Kolom (Columns)
+        col-gpios = <&gpio0 2  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 33]
+                    <&gpio1 0  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 33]
+                    <&gpio1 1  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 34]
+                    <&gpio1 2  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 34]
+                    <&gpio1 3  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 34]
+                    <&gpio1 4  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 34]
+                    <&gpio1 5  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 34]
+                    <&gpio1 6  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 34]
+                    <&gpio1 7  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 35]
+                    <&gpio1 8  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 35]
+                    <&gpio1 9  (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 35]
+                    <&gpio1 10 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 35]
+                    <&gpio1 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 36]
+                    <&gpio1 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>, [cite: 36]
+                    <&gpio1 13 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>; [cite: 36]
+        diode-direction = <0>; // COL2ROW [cite: 37]
     };
 
-    ec11_left: ec11_left {
-        compatible = "zmk,ec11-encoder";
-        a-gpios = <&gpio0 9 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-        b-gpios = <&gpio0 10 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
-        encoder-keycodes = <&kp VOL_UP>, <&kp VOL_DN>;
+    default_transform: matrix_transform { // Menambahkan node matrix_transform yang direferensikan di chosen
+        compatible = "zmk,matrix-transform";
+        rows = <5>; // Disesuaikan dengan jumlah row-gpios
+        columns = <16>; // Disesuaikan dengan jumlah col-gpios
+        map = <
+RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) RC(0,5) RC(0,6) RC(0,7) RC(0,8) RC(0,9) RC(0,10) RC(0,11) RC(0,12) RC(0,13) RC(0,14) RC(0,15)
+RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4) RC(1,5) RC(1,6) RC(1,7) RC(1,8) RC(1,9) RC(1,10) RC(1,11) RC(1,12) RC(1,13) RC(1,14) RC(1,15)
+RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10) RC(2,11) RC(2,12) RC(2,13) RC(2,14) RC(2,15)
+RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(3,6) RC(3,7) RC(3,8) RC(3,9) RC(3,10) RC(3,11) RC(3,12) RC(3,13) RC(3,14) RC(3,15)
+RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5) RC(4,6) RC(4,7) RC(4,8) RC(4,9) RC(4,10) RC(4,11) RC(4,12) RC(4,13) RC(4,14) RC(4,15)
+        >;
     };
 
-    i2c0: i2c@40003000 {
-        status = "okay";
-        compatible = "nordic,nrf-twi";
-        sda-pin = <26>;
-        scl-pin = <27>;
-        clock-frequency = <I2C_BITRATE_FAST>;
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder_1 &encoder_2>; // Merujuk ke kedua encoder yang telah didefinisikan 
+        triggers-per-rotation = <20>; // Tetap seperti yang Anda berikan 
+    };
 
-        ssd1306@3c {
-            compatible = "solomon,ssd1306fb";
-            reg = <0x3c>;
-            width = <128>;
-            height = <64>;
-            segment-offset = <0>;
-            page-offset = <0>;
-            display-offset = <0>;
-            multiplex-ratio = <63>;
-            prechargep = <0xF1>;
-            com-invdir;
-            com-sequential;
-            contrast = <128>;
-        };
+    vbat: vbatt {
+        compatible = "zmk,battery-voltage-divider";
+        label = "BATTERY";
+        io-channels = <&adc SAADC_CH_PSELP_PSELP_AnalogInput4>; // Umumnya AIN4 (P0.04) pada nrfmicro 1.3
+        output-ohms = <2000000>; // Resistor atas (contoh: 2M Ohm)
+        full-ohms = <1000000>;   // Resistor bawah (contoh: 1M Ohm)
+    };
+};
+
+// Bagian I2C untuk OLED
+// SDA-pin 26 (P0.26) dan SCL-pin 27 (P0.27) umumnya adalah I2C1 pada nRF52840 (nrfmicro 1.3)
+&i2c1 { // Mengganti dari i2c0 ke i2c1 karena pin 26 dan 27 biasanya untuk I2C1
+    status = "okay"; [cite: 39]
+    compatible = "nordic,nrf-twi"; [cite: 39]
+    sda-pin = <26>; [cite: 39]
+    scl-pin = <27>; [cite: 40]
+    clock-frequency = <I2C_BITRATE_FAST>; [cite: 40]
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb"; [cite: 40]
+        reg = <0x3c>; [cite: 41]
+        width = <128>; [cite: 41]
+        height = <64>; [cite: 41]
+        segment-offset = <0>; [cite: 41]
+        page-offset = <0>; [cite: 41]
+        display-offset = <0>; [cite: 41]
+        multiplex-ratio = <63>; [cite: 42]
+        prechargep = <0xF1>; [cite: 42]
+        com-invdir; [cite: 42]
+        com-sequential; [cite: 42]
+        contrast = <128>; [cite: 42]
     };
 };
