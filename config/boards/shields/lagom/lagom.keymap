@@ -29,5 +29,6 @@
 &kp LSHFT             &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RSHFT  &kp UP     &kp PG_DN
 &kp LCTRL   &kp LGUI  &kp LALT                                &kp SPACE                               &kp LSHFT &trans     &kp LEFT   &kp DOWN   &kp RIGHT
             >;
+        }
     };
 };
