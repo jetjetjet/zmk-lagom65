@@ -1,10 +1,13 @@
 file_format: "1"
 id: lagom
-name: Lagom
+name: lagom
 type: shield
 url: https://github.com/mohoyt/lagom
-requires: [nrfmicro_13]
+# requires: [nrfmicro_13]
+requires: [pro_micro]
+exposes: [i2c_oled]
 features:
   - keys
   - encoders
   - display
+  - studio
