@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #include <dt-bindings/zmk/matrix_transform.h>
 
 / {
@@ -9,7 +15,7 @@
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-demux";
         label = "KSCAN";
-        debounce-period = <5>;
+        // debounce-period = <5>;
         polling-interval-msec = <25>;
         input-gpios //  B6, B2, B3, B1, F7 lagom
             = <&pro_micro 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // B6
